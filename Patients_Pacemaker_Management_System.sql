@@ -465,6 +465,30 @@ INSERT INTO APPOINTMENTS (APPOINTMENT_ID, PATIENT_ID, APPOINTMENT_DATE, DOCTOR_N
 
 SELECT * FROM APPOINTMENTS;
 
+-- List all patients with Medtronic Pacemakers 
 
+select p.name , pac.model , pac.manufacturer
+from patients as p
+inner join pacemakers as pac 
+on p.patient_id = pac.patient_id
+where pac.manufacturer = "medtronic";
+
+-- Find pacemakers with battery life below 100 months 
+
+select model , manufacturer , battery_life 
+from pacemakers
+where battery_life < 100;
+
+-- Patients who had implantation after 2023
+
+select p.name, pac.implantation_date
+from patients as p
+inner join pacemakers as pac
+on p.patient_id = pac.patient_id
+where pac.implantation_date > "2023-01-01";
+
+-- count the pacemakers by manufacturer
+
+select manufacturer , count(*) as total_pacemakers from pacemakers group by manufacturer;
 
 
